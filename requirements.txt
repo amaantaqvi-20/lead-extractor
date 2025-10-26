@@ -1,0 +1,7 @@
+ttkbootstrap
+PyPDF2
+python-docx
+openpyxl
+beautifulsoup4
+requests
+spacy
