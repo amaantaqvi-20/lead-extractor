@@ -1,83 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lead Extractor Pro - Extract Emails & Phones Instantly</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
-        header { background: #007bff; color: white; padding: 20px; text-align: center; }
-        main { max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; margin: 10px; }
-        .button:hover { background: #0056b3; }
-        .premium-popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1000; }
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
-        .features { list-style: none; padding: 0; }
-        .features li { margin: 10px 0; padding-left: 20px; position: relative; }
-        .features li:before { content: '✅'; position: absolute; left: 0; }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lead Extractor Pro - Extract Emails & Phones Instantly</title>
+<style>
+    /* ---------- Global ---------- */
+    :root {
+        --primary: #007bff;
+        --secondary: #6c757d;
+        --accent: #00c6ff;
+        --gradient: linear-gradient(135deg, #007bff, #00c6ff);
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f4f6fb;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ---------- Header ---------- */
+    header {
+        background: var(--gradient);
+        color: white;
+        text-align: center;
+        padding: 60px 20px;
+        border-bottom-left-radius: 50% 10%;
+        border-bottom-right-radius: 50% 10%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    header h1 {
+        font-size: 2.8em;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+    }
+
+    header p {
+        font-size: 1.1em;
+        opacity: 0.95;
+    }
+
+    /* ---------- Main Container ---------- */
+    main {
+        max-width: 900px;
+        margin: 40px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        animation: fadeIn 0.8s ease;
+    }
+
+    main h2 {
+        font-size: 1.8em;
+        margin-bottom: 15px;
+        color: #222;
+        border-left: 5px solid var(--primary);
+        padding-left: 10px;
+    }
+
+    /* ---------- Feature List ---------- */
+    .features {
+        list-style: none;
+        margin: 20px 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 15px;
+    }
+
+    .features li {
+        background: #f8f9fa;
+        border-left: 5px solid var(--accent);
+        padding: 15px 20px;
+        border-radius: 10px;
+        position: relative;
+        transition: 0.3s;
+    }
+
+    .features li:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* ---------- Buttons ---------- */
+    .button {
+        background: var(--gradient);
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        margin: 15px 10px;
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+    }
+
+    .button:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #00aaff, #0077ff);
+        box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+    }
+
+    /* ---------- Premium Popup ---------- */
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 99;
+    }
+
+    .premium-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(15px);
+        border-radius: 15px;
+        padding: 30px 25px;
+        width: 90%;
+        max-width: 400px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        text-align: center;
+        z-index: 100;
+        animation: slideUp 0.4s ease;
+    }
+
+    .premium-popup h3 {
+        font-size: 1.6em;
+        color: var(--primary);
+        margin-bottom: 10px;
+    }
+
+    .premium-popup ul {
+        text-align: left;
+        list-style: none;
+        margin: 20px 0;
+        padding: 0;
+    }
+
+    .premium-popup li {
+        padding-left: 25px;
+        position: relative;
+        margin-bottom: 8px;
+    }
+
+    .premium-popup li::before {
+        content: '✨';
+        position: absolute;
+        left: 0;
+    }
+
+    /* ---------- Policy Section ---------- */
+    footer {
+        max-width: 900px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    footer h3 {
+        border-bottom: 3px solid var(--primary);
+        display: inline-block;
+        margin-bottom: 15px;
+        padding-bottom: 5px;
+    }
+
+    footer p {
+        margin: 10px 0 20px;
+    }
+
+    footer a {
+        color: var(--primary);
+        font-weight: 600;
+    }
+
+    /* ---------- Animations ---------- */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideUp {
+        from { transform: translate(-50%, 20%); opacity: 0; }
+        to { transform: translate(-50%, -50%); opacity: 1; }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 600px) {
+        header h1 { font-size: 2em; }
+        .features { grid-template-columns: 1fr; }
+        main, footer { padding: 25px; }
+    }
+</style>
 </head>
+
 <body>
-    <header>
-        <h1>Lead Extractor Pro</h1>
-        <p>Extract 10,000+ emails & phones from PDFs, URLs, Excel in 60 seconds.</p>
-    </header>
-    <main>
-        <h2>Why Choose Lead Extractor Pro?</h2>
-        <ul class="features">
-            <li>Unlimited extraction - no limits!</li>
-            <li>AI-powered data enrichment & scoring</li>
-            <li>Filter by domain, field, area, city</li>
-            <li>CRM integrations & premium support</li>
-            <li>7-day free trial</li>
-        </ul>
-        <p><strong>Free Version:</strong> 100 leads | <strong>Pro:</strong> Unlimited + Premium Features</p>
-        <a href="#" onclick="showPremiumPopup()" class="button">Begin 7-Day Free Trial</a>
-        <a href="https://github.com/amaantaqvi-20/lead-extractor" class="button">Download Free Version</a>
-        <h3>Policy Pages</h3>
-        <ul>
-            <li><a href="#refund">Cancellation & Refunds</a></li>
-            <li><a href="#shipping">Shipping Policy</a></li>
-            <li><a href="#terms">Terms & Conditions</a></li>
-            <li><a href="#privacy">Privacy Policy</a></li>
-            <li><a href="#contact">Contact Us</a></li>
-        </ul>
-    </main>
 
-    <!-- Premium Popup -->
-    <div class="overlay" onclick="hidePremiumPopup()"></div>
-    <div class="premium-popup">
-        <h3>Upgrade to Pro</h3>
-        <p>Enjoy unlimited extraction, AI enrichment, and more!</p>
-        <p><strong>Pricing:</strong></p>
-        <ul>
-            <li>Monthly: $9.99</li>
-            <li>Annual: $99</li>
-            <li>Lifetime: $29</li>
-        </ul>
-        <button onclick="beginTrial()" class="button">Begin 7-Day Free Trial</button>
-        <button onclick="hidePremiumPopup()" class="button">Later</button>
+<header>
+    <h1>Lead Extractor Pro</h1>
+    <p>Extract 10,000+ verified emails & phone numbers from PDFs, Excel, and web pages in seconds.</p>
+</header>
+
+<main>
+    <h2>🚀 Why Professionals Choose Lead Extractor Pro</h2>
+    <ul class="features">
+        <li>Unlimited data extraction — no daily limits</li>
+        <li>AI-powered email validation & lead scoring</li>
+        <li>Filter by domain, city, or keywords instantly</li>
+        <li>Exports to Excel, CSV, or integrated CRM</li>
+        <li>7-Day free trial, no card required</li>
+        <li>Priority 24/7 customer support</li>
+    </ul>
+
+    <p style="margin-top: 10px; font-size: 1.1em;">
+        <strong>Free Version:</strong> Up to 100 leads |
+        <strong>Pro:</strong> Unlimited + AI features
+    </p>
+
+    <div style="text-align: center;">
+        <a href="#" onclick="showPremiumPopup()" class="button">✨ Begin 7-Day Free Trial</a>
+        <a href="https://github.com/amaantaqvi-20/lead-extractor" target="_blank" class="button" style="background:#333;">⬇️ Download Free Version</a>
     </div>
+</main>
 
-    <script>
-        function showPremiumPopup() {
-            document.querySelector('.overlay').style.display = 'block';
-            document.querySelector('.premium-popup').style.display = 'block';
-        }
-        function hidePremiumPopup() {
-            document.querySelector('.overlay').style.display = 'none';
-            document.querySelector('.premium-popup').style.display = 'none';
-        }
-        function beginTrial() {
-            alert("Trial activated! Download the Pro version and enter the generated key.");
-            hidePremiumPopup();
-        }
-    </script>
+<!-- Premium Popup -->
+<div class="overlay" onclick="hidePremiumPopup()"></div>
+<div class="premium-popup">
+    <h3>Upgrade to Pro</h3>
+    <p>Unlock the full power of Lead Extractor Pro</p>
+    <ul>
+        <li>Unlimited files & domains</li>
+        <li>AI email enrichment</li>
+        <li>Real-time validation</li>
+        <li>Lifetime updates</li>
+    </ul>
+    <p><strong>Pricing:</strong></p>
+    <p>💎 <strong>Lifetime Access – $29</strong></p>
+    <button onclick="beginTrial()" class="button">Start 7-Day Free Trial</button>
+    <button onclick="hidePremiumPopup()" class="button" style="background:#999;">Maybe Later</button>
+</div>
 
-    <!-- Policy Pages (simple placeholders) -->
-    <h2 id="refund">Cancellation & Refunds</h2><p>Refunds within 7 days for monthly plans. No refunds for lifetime. Contact support@yourdomain.com.</p>
-    <h2 id="shipping">Shipping Policy</h2><p>Digital product—no physical shipping. Instant download after payment.</p>
-    <h2 id="terms">Terms & Conditions</h2><p>By using this service, you agree to our terms. Use responsibly. No spam.</p>
-    <h2 id="privacy">Privacy Policy</h2><p>We don't store your data. Emails are processed locally. GDPR compliant.</p>
-    <h2 id="contact">Contact Us</h2><p>Email: support@yourdomain.com | Phone: +91-7275859841</p>
+<!-- Footer -->
+<footer>
+    <h3>📜 Policy & Legal</h3>
+    <h4 id="refund">Cancellation & Refunds</h4>
+    <p>Refunds are available within 7 days for monthly plans. No refunds for lifetime licenses. Contact: <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>.</p>
+
+    <h4 id="shipping">Shipping Policy</h4>
+    <p>This is a digital software — no physical shipping. Instant download available after purchase.</p>
+
+    <h4 id="terms">Terms & Conditions</h4>
+    <p>By using this software, you agree to comply with all data privacy and anti-spam laws.</p>
+
+    <h4 id="privacy">Privacy Policy</h4>
+    <p>We do not store or sell user data. All processing happens locally on your computer.</p>
+
+    <h4 id="contact">Contact Us</h4>
+    <p>Email: <a href="mailto:support@yourdomain.com">support@yourdomain.com</a> | Phone: +91-7275859841</p>
+</footer>
+
+<script>
+function showPremiumPopup() {
+    document.querySelector('.overlay').style.display = 'block';
+    document.querySelector('.premium-popup').style.display = 'block';
+}
+function hidePremiumPopup() {
+    document.querySelector('.overlay').style.display = 'none';
+    document.querySelector('.premium-popup').style.display = 'none';
+}
+function beginTrial() {
+    alert("✅ Trial Activated! Download the Pro version and use your trial key.");
+    hidePremiumPopup();
+}
+</script>
+
 </body>
+</html>
