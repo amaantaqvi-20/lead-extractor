@@ -1,9 +1,83 @@
 <!DOCTYPE html>
-<html>
-<head><title>Lead Extractor Pro</title></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Extractor Pro - Extract Emails & Phones Instantly</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
+        header { background: #007bff; color: white; padding: 20px; text-align: center; }
+        main { max-width: 800px; margin: 20px auto; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; text-decoration: none; display: inline-block; margin: 10px; }
+        .button:hover { background: #0056b3; }
+        .premium-popup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; border: 1px solid #ccc; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 1000; }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
+        .features { list-style: none; padding: 0; }
+        .features li { margin: 10px 0; padding-left: 20px; position: relative; }
+        .features li:before { content: '✅'; position: absolute; left: 0; }
+    </style>
+</head>
 <body>
-<h1>Lead Extractor Pro</h1>
-<p>Extract emails and phones from files and URLs.</p>
-<p><a href="https://github.com/amaantaqvi-20/lead-extractor-pro">Download</a></p>
+    <header>
+        <h1>Lead Extractor Pro</h1>
+        <p>Extract 10,000+ emails & phones from PDFs, URLs, Excel in 60 seconds.</p>
+    </header>
+    <main>
+        <h2>Why Choose Lead Extractor Pro?</h2>
+        <ul class="features">
+            <li>Unlimited extraction - no limits!</li>
+            <li>AI-powered data enrichment & scoring</li>
+            <li>Filter by domain, field, area, city</li>
+            <li>CRM integrations & premium support</li>
+            <li>7-day free trial</li>
+        </ul>
+        <p><strong>Free Version:</strong> 100 leads | <strong>Pro:</strong> Unlimited + Premium Features</p>
+        <a href="#" onclick="showPremiumPopup()" class="button">Begin 7-Day Free Trial</a>
+        <a href="https://github.com/amaantaqvi-20/lead-extractor" class="button">Download Free Version</a>
+        <h3>Policy Pages</h3>
+        <ul>
+            <li><a href="#refund">Cancellation & Refunds</a></li>
+            <li><a href="#shipping">Shipping Policy</a></li>
+            <li><a href="#terms">Terms & Conditions</a></li>
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+    </main>
+
+    <!-- Premium Popup -->
+    <div class="overlay" onclick="hidePremiumPopup()"></div>
+    <div class="premium-popup">
+        <h3>Upgrade to Pro</h3>
+        <p>Enjoy unlimited extraction, AI enrichment, and more!</p>
+        <p><strong>Pricing:</strong></p>
+        <ul>
+            <li>Monthly: $9.99</li>
+            <li>Annual: $99</li>
+            <li>Lifetime: $29</li>
+        </ul>
+        <button onclick="beginTrial()" class="button">Begin 7-Day Free Trial</button>
+        <button onclick="hidePremiumPopup()" class="button">Later</button>
+    </div>
+
+    <script>
+        function showPremiumPopup() {
+            document.querySelector('.overlay').style.display = 'block';
+            document.querySelector('.premium-popup').style.display = 'block';
+        }
+        function hidePremiumPopup() {
+            document.querySelector('.overlay').style.display = 'none';
+            document.querySelector('.premium-popup').style.display = 'none';
+        }
+        function beginTrial() {
+            alert("Trial activated! Download the Pro version and enter the generated key.");
+            hidePremiumPopup();
+        }
+    </script>
+
+    <!-- Policy Pages (simple placeholders) -->
+    <h2 id="refund">Cancellation & Refunds</h2><p>Refunds within 7 days for monthly plans. No refunds for lifetime. Contact support@yourdomain.com.</p>
+    <h2 id="shipping">Shipping Policy</h2><p>Digital product—no physical shipping. Instant download after payment.</p>
+    <h2 id="terms">Terms & Conditions</h2><p>By using this service, you agree to our terms. Use responsibly. No spam.</p>
+    <h2 id="privacy">Privacy Policy</h2><p>We don't store your data. Emails are processed locally. GDPR compliant.</p>
+    <h2 id="contact">Contact Us</h2><p>Email: support@yourdomain.com | Phone: +91-7275859841</p>
 </body>
-</html>
