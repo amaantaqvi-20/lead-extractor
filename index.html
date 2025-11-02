@@ -1,299 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Lead Extractor Pro - Extract Emails & Phones Instantly</title>
-<style>
-    /* ---------- Global ---------- */
-    :root {
-        --primary: #007bff;
-        --secondary: #6c757d;
-        --accent: #00c6ff;
-        --gradient: linear-gradient(135deg, #007bff, #00c6ff);
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lead Extractor Pro – Extract 10,000+ Leads in 60 Seconds</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --accent: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        a { text-decoration:none; color:inherit; }
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
+        /* HERO */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content:'';
+            position:absolute;
+            top:0; left:0; right:0; bottom:0;
+            background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300"><path fill="%23ffffff10" d="M0,100 Q300,50 600,100 T1000,100 L1000,300 L0,300 Z"/></svg>') no-repeat center;
+            background-size:cover;
+            opacity:0.3;
+        }
+        .hero h1 {
+            font-size:3rem;
+            margin-bottom:15px;
+            position:relative;
+            z-index:1;
+        }
+        .hero p {
+            font-size:1.3rem;
+            max-width:700px;
+            margin:0 auto 30px;
+            opacity:0.95;
+            z-index:1;
+        }
+        .cta-btn {
+            background:white;
+            color: var(--primary);
+            padding:14px 32px;
+            border-radius:50px;
+            font-weight:700;
+            font-size:1.1rem;
+            display:inline-block;
+            box-shadow:0 8px 25px rgba(99,102,241,0.3);
+            transition:all 0.3s;
+            z-index:1;
+            animation:pulse 2s infinite;
+        }
+        .cta-btn:hover {
+            transform:translateY(-3px);
+            box-shadow:0 12px 30px rgba(99,102,241,0.4);
+        }
+        @keyframes pulse {
+            0% { box-shadow:0 8px 25px rgba(99,102,241,0.3); }
+            50% { box-shadow:0 12px 35px rgba(99,102,241,0.5); }
+            100% { box-shadow:0 8px 25px rgba(99,102,241,0.3); }
+        }
 
-    body {
-        font-family: 'Segoe UI', Arial, sans-serif;
-        background: #f4f6fb;
-        color: #333;
-        line-height: 1.6;
-    }
+        /* FEATURES */
+        .features {
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+            gap:20px;
+            max-width:1000px;
+            margin:50px auto;
+            padding:0 20px;
+        }
+        .feature-card {
+            background:white;
+            padding:25px;
+            border-radius:16px;
+            text-align:center;
+            box-shadow:0 4px 15px rgba(0,0,0,0.05);
+            transition:0.3s;
+        }
+        .feature-card:hover {
+            transform:translateY(-8px);
+            box-shadow:0 12px 30px rgba(0,0,0,0.1);
+        }
+        .feature-card h3 {
+            margin:15px 0 10px;
+            color: var(--primary);
+        }
 
-    a { color: var(--primary); text-decoration: none; }
-    a:hover { text-decoration: underline; }
+        /* SOCIAL PROOF / TESTIMONIALS */
+        .testimonials {
+            background:#f8fafc;
+            padding:60px 20px;
+            text-align:center;
+        }
+        .testimonial {
+            max-width:700px;
+            margin:0 auto 30px;
+            font-style:italic;
+            color:#555;
+        }
+        .author {
+            font-weight:600;
+            color: var(--primary);
+            margin-top:10px;
+        }
 
-    /* ---------- Header ---------- */
-    header {
-        background: var(--gradient);
-        color: white;
-        text-align: center;
-        padding: 60px 20px;
-        border-bottom-left-radius: 50% 10%;
-        border-bottom-right-radius: 50% 10%;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    }
+        /* URGENCY */
+        .urgency {
+            text-align:center;
+            padding:20px;
+            background:#fff5f5;
+            border:1px solid #fecaca;
+            border-radius:12px;
+            max-width:800px;
+            margin:30px auto;
+            font-weight:600;
+            color:#991b1b;
+        }
 
-    header h1 {
-        font-size: 2.8em;
-        margin-bottom: 10px;
-        letter-spacing: 1px;
-    }
+        /* POPUP */
+        .overlay {
+            display:none;
+            position:fixed;
+            top:0; left:0; width:100%; height:100%;
+            background:rgba(0,0,0,0.6);
+            z-index:99;
+        }
+        .premium-popup {
+            display:none;
+            position:fixed;
+            top:50%; left:50%;
+            transform:translate(-50%,-50%);
+            background:rgba(255,255,255,0.95);
+            backdrop-filter:blur(12px);
+            border-radius:16px;
+            padding:40px 30px;
+            width:90%;
+            max-width:440px;
+            box-shadow:0 8px 40px rgba(0,0,0,0.2);
+            text-align:center;
+            z-index:100;
+            animation:slideUp 0.4s ease;
+        }
+        .premium-popup h3 {
+            font-size:1.6rem;
+            color: var(--primary);
+            margin-bottom:12px;
+        }
+        .premium-popup ul {
+            text-align:left;
+            list-style:none;
+            margin:20px 0;
+            padding:0;
+        }
+        .premium-popup li {
+            padding-left:25px;
+            position:relative;
+            margin-bottom:8px;
+        }
+        .premium-popup li::before {
+            content:'✨';
+            position:absolute;
+            left:0;
+        }
 
-    header p {
-        font-size: 1.1em;
-        opacity: 0.95;
-    }
+        @keyframes slideUp {
+            from { transform:translate(-50%,-40%); opacity:0; }
+            to { transform:translate(-50%,-50%); opacity:1; }
+        }
 
-    /* ---------- Main Container ---------- */
-    main {
-        max-width: 900px;
-        margin: 40px auto;
-        background: white;
-        padding: 40px;
-        border-radius: 15px;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-        animation: fadeIn 0.8s ease;
-    }
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding:60px 20px 40px;
+            text-align:center;
+        }
+        footer a { color: #93c5fd; }
+        .policy-links a {
+            margin:0 10px;
+            font-size:0.9rem;
+        }
 
-    main h2 {
-        font-size: 1.8em;
-        margin-bottom: 15px;
-        color: #222;
-        border-left: 5px solid var(--primary);
-        padding-left: 10px;
-    }
-
-    /* ---------- Feature List ---------- */
-    .features {
-        list-style: none;
-        margin: 20px 0;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 15px;
-    }
-
-    .features li {
-        background: #f8f9fa;
-        border-left: 5px solid var(--accent);
-        padding: 15px 20px;
-        border-radius: 10px;
-        position: relative;
-        transition: 0.3s;
-    }
-
-    .features li:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    /* ---------- Buttons ---------- */
-    .button {
-        background: var(--gradient);
-        color: white;
-        padding: 12px 25px;
-        border: none;
-        border-radius: 30px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: inline-block;
-        margin: 15px 10px;
-        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
-    }
-
-    .button:hover {
-        transform: scale(1.05);
-        background: linear-gradient(135deg, #00aaff, #0077ff);
-        box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
-    }
-
-    /* ---------- Premium Popup ---------- */
-    .overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        z-index: 99;
-    }
-
-    .premium-popup {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(15px);
-        border-radius: 15px;
-        padding: 30px 25px;
-        width: 90%;
-        max-width: 400px;
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-        text-align: center;
-        z-index: 100;
-        animation: slideUp 0.4s ease;
-    }
-
-    .premium-popup h3 {
-        font-size: 1.6em;
-        color: var(--primary);
-        margin-bottom: 10px;
-    }
-
-    .premium-popup ul {
-        text-align: left;
-        list-style: none;
-        margin: 20px 0;
-        padding: 0;
-    }
-
-    .premium-popup li {
-        padding-left: 25px;
-        position: relative;
-        margin-bottom: 8px;
-    }
-
-    .premium-popup li::before {
-        content: '✨';
-        position: absolute;
-        left: 0;
-    }
-
-    /* ---------- Policy Section ---------- */
-    footer {
-        max-width: 900px;
-        margin: 40px auto;
-        background: white;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-    }
-
-    footer h3 {
-        border-bottom: 3px solid var(--primary);
-        display: inline-block;
-        margin-bottom: 15px;
-        padding-bottom: 5px;
-    }
-
-    footer p {
-        margin: 10px 0 20px;
-    }
-
-    footer a {
-        color: var(--primary);
-        font-weight: 600;
-    }
-
-    /* ---------- Animations ---------- */
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideUp {
-        from { transform: translate(-50%, 20%); opacity: 0; }
-        to { transform: translate(-50%, -50%); opacity: 1; }
-    }
-
-    /* ---------- Responsive ---------- */
-    @media (max-width: 600px) {
-        header h1 { font-size: 2em; }
-        .features { grid-template-columns: 1fr; }
-        main, footer { padding: 25px; }
-    }
-</style>
+        /* RESPONSIVE */
+        @media(max-width:768px) {
+            .hero h1 { font-size:2.2rem; }
+            .hero p { font-size:1.1rem; }
+        }
+    </style>
 </head>
-
 <body>
 
-<header>
+<!-- HERO -->
+<section class="hero">
     <h1>Lead Extractor Pro</h1>
-    <p>Extract 10,000+ verified emails & phone numbers from PDFs, Excel, and web pages in seconds.</p>
-</header>
-
-<main>
-    <h2>🚀 Why Professionals Choose Lead Extractor Pro</h2>
-    <ul class="features">
-        <li>Unlimited data extraction — no daily limits</li>
-        <li>AI-powered email validation & lead scoring</li>
-        <li>Filter by domain, city, or keywords instantly</li>
-        <li>Exports to Excel, CSV, or integrated CRM</li>
-        <li>7-Day free trial, no card required</li>
-        <li>Priority 24/7 customer support</li>
-    </ul>
-
-    <p style="margin-top: 10px; font-size: 1.1em;">
-        <strong>Free Version:</strong> Up to 100 leads |
-        <strong>Pro:</strong> Unlimited + AI features
+    <p>Extract <strong>10,000+ verified emails & phone numbers</strong> from PDFs, Excel, and web pages — in under 60 seconds.</p>
+    <a href="#" onclick="showPremiumPopup()" class="cta-btn">Start 7-Day FREE Trial</a>
+    <p style="margin-top:15px; font-size:0.95rem;">
+        <a href="https://github.com/amaantaqvi-20/lead-extractor" target="_blank" style="color:rgba(255,255,255,0.8);">⬇️ Download Free Version (100 leads)</a>
     </p>
+</section>
 
-    <div style="text-align: center;">
-        <a href="#" onclick="showPremiumPopup()" class="button">✨ Begin 7-Day Free Trial</a>
-        <a href="https://github.com/amaantaqvi-20/lead-extractor" target="_blank" class="button" style="background:#333;">⬇️ Download Free Version</a>
+<!-- FEATURES -->
+<section class="features">
+    <div class="feature-card">
+        <h3>Unlimited Extraction</h3>
+        <p>Process thousands of files without limits or daily caps.</p>
     </div>
-</main>
+    <div class="feature-card">
+        <h3>AI Lead Scoring</h3>
+        <p>Automatically prioritize your best leads for outreach.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Smart Filters & Domains</h3>
+        <p>Filter leads by domain, city, niche or keywords.</p>
+    </div>
+    <div class="feature-card">
+        <h3>Export Anywhere</h3>
+        <p>Save results to Excel, CSV or integrate with your CRM.</p>
+    </div>
+</section>
 
-<!-- Premium Popup -->
+<!-- URGENCY -->
+<div class="urgency">
+    First 50 users get <strong>LIFETIME ACCESS for $29</strong> — <span id="countdown">7 days left!</span>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+    <div class="testimonial">
+        “Extracted 5,000 leads in 10 minutes — best tool I've used!”
+        <div class="author">— Rahul S., Digital Marketer</div>
+    </div>
+    <div class="testimonial">
+        “AI scoring saved me 20 hours of manual filtering.”
+        <div class="author">— Priya K., Startup Founder</div>
+    </div>
+</section>
+
+<!-- PREMIUM POPUP -->
 <div class="overlay" onclick="hidePremiumPopup()"></div>
 <div class="premium-popup">
     <h3>Upgrade to Pro</h3>
-    <p>Unlock the full power of Lead Extractor Pro</p>
+    <p>Unlock unlimited leads + AI + filters</p>
     <ul>
         <li>Unlimited files & domains</li>
-        <li>AI email enrichment</li>
-        <li>Real-time validation</li>
-        <li>Lifetime updates</li>
+        <li>AI enrichment & scoring</li>
+        <li>Priority support & updates</li>
+        <li>Lifetime usage (no hidden renewals)</li>
     </ul>
-    <p><strong>Pricing:</strong></p>
-    <p>💎 <strong>Lifetime Access – $29</strong></p>
-    <button onclick="beginTrial()" class="button">Start 7-Day Free Trial</button>
-    <button onclick="hidePremiumPopup()" class="button" style="background:#999;">Maybe Later</button>
+    <p><strong>Special Launch Offer:</strong></p>
+    <p>Lifetime Access – <strong style="color:#dc2626;">$29</strong> (One-Time)</p>
+    <button onclick="beginTrial()" class="cta-btn" style="margin-top:10px;">Start 7-Day Free Trial</button>
+    <button onclick="hidePremiumPopup()" class="cta-btn" style="background:#999; color:white; margin-top:10px;">Maybe Later</button>
 </div>
 
-<!-- Footer -->
+<!-- FOOTER -->
 <footer>
-    <h3>📜 Policy & Legal</h3>
-    <h4 id="refund">Cancellation & Refunds</h4>
-    <p>Refunds are available within 7 days for monthly plans. No refunds for lifetime licenses. Contact: <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>.</p>
+    <div class="policy-links">
+        <a href="#refund">Refunds</a> |
+        <a href="#shipping">Shipping</a> |
+        <a href="#terms">Terms</a> |
+        <a href="#privacy">Privacy</a> |
+        <a href="#contact">Contact</a>
+    </div>
+    <p style="margin-top:20px; font-size:0.9rem; opacity:0.8;">
+        © 2025 Lead Extractor Pro. All rights reserved.<br>
+        Email: support@leadextractor.pro | Phone: +91-7275859841
+    </p>
+    <div style="max-width:800px; margin:40px auto 0; text-align:left; font-size:0.85rem; line-height:1.5;">
+        <h4 id="refund">Cancellation & Refunds</h4>
+        <p>Full refund within 7 days for monthly plans. Lifetime plans are non-refundable after activation.</p>
 
-    <h4 id="shipping">Shipping Policy</h4>
-    <p>This is a digital software — no physical shipping. Instant download available after purchase.</p>
+        <h4 id="shipping">Shipping Policy</h4>
+        <p>Digital product — instant download after payment. No physical shipping.</p>
 
-    <h4 id="terms">Terms & Conditions</h4>
-    <p>By using this software, you agree to comply with all data privacy and anti-spam laws.</p>
+        <h4 id="terms">Terms & Conditions</h4>
+        <p>For legal lead-generation use only. Comply with GDPR & CAN-SPAM.</p>
 
-    <h4 id="privacy">Privacy Policy</h4>
-    <p>We do not store or sell user data. All processing happens locally on your computer.</p>
+        <h4 id="privacy">Privacy Policy</h4>
+        <p>We do not store or share your data. All processing happens locally on your device.</p>
 
-    <h4 id="contact">Contact Us</h4>
-    <p>Email: <a href="mailto:support@yourdomain.com">support@yourdomain.com</a> | Phone: +91-7275859841</p>
+        <h4 id="contact">Contact Us</h4>
+        <p>support@leadextractor.pro | +91-7275859841</p>
+    </div>
 </footer>
 
 <script>
-function showPremiumPopup() {
-    document.querySelector('.overlay').style.display = 'block';
-    document.querySelector('.premium-popup').style.display = 'block';
-}
-function hidePremiumPopup() {
-    document.querySelector('.overlay').style.display = 'none';
-    document.querySelector('.premium-popup').style.display = 'none';
-}
-function beginTrial() {
-    alert("✅ Trial Activated! Download the Pro version and use your trial key.");
-    hidePremiumPopup();
-}
+    function showPremiumPopup(){
+        document.querySelector('.overlay').style.display='block';
+        document.querySelector('.premium-popup').style.display='block';
+    }
+    function hidePremiumPopup(){
+        document.querySelector('.overlay').style.display='none';
+        document.querySelector('.premium-popup').style.display='none';
+    }
+    function beginTrial(){
+        alert("✅ Trial Activated! Check your email for your Pro license key.");
+        hidePremiumPopup();
+    }
+    // Countdown Timer
+    let daysLeft = 7;
+    const countdownEl = document.getElementById('countdown');
+    setInterval(()=>{
+        const now = new Date();
+        const future = new Date(now.getTime() + daysLeft * 24*60*60*1000);
+        const diff = future - now;
+        if(diff > 0){
+            const d = Math.floor(diff / (1000*60*60*24));
+            const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+            countdownEl.textContent = `${d}d ${h}h left`;
+        }
+    }, 3600000);
 </script>
 
 </body>
